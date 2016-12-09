@@ -1,0 +1,23 @@
+Trying to get dllexport properly enabled in MediaInfo.h just didn't work.
+Therefore, these must not be either, otherwise only these symbols get exported.
+
+--- origsrc/MediaInfoLib/Source/ThirdParty/aes-gladman/brg_types.h	2016-12-01 04:10:26.000000000 -0600
++++ src/MediaInfoLib/Source/ThirdParty/aes-gladman/brg_types.h	2016-12-07 23:12:05.190544800 -0600
+@@ -111,7 +111,7 @@ extern "C" {
+ 
+ #ifndef RETURN_VALUES
+ #  define RETURN_VALUES
+-#  if defined( DLL_EXPORT )
++#  if 0 && defined( DLL_EXPORT )
+ #    if defined( _MSC_VER ) || defined ( __INTEL_COMPILER )
+ #      define VOID_RETURN    __declspec( dllexport ) void __stdcall
+ #      define INT_RETURN     __declspec( dllexport ) int  __stdcall
+@@ -121,7 +121,7 @@ extern "C" {
+ #    else
+ #      error Use of the DLL is only available on the Microsoft, Intel and GCC compilers
+ #    endif
+-#  elif defined( DLL_IMPORT )
++#  elif 0 && defined( DLL_IMPORT )
+ #    if defined( _MSC_VER ) || defined ( __INTEL_COMPILER )
+ #      define VOID_RETURN    __declspec( dllimport ) void __stdcall
+ #      define INT_RETURN     __declspec( dllimport ) int  __stdcall

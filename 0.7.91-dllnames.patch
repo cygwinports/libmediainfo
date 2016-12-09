@@ -1,0 +1,24 @@
+--- origsrc/MediaInfoLib/Source/MediaInfo/Reader/Reader_libcurl_Include.h	2016-12-01 04:10:26.000000000 -0600
++++ src/MediaInfoLib/Source/MediaInfo/Reader/Reader_libcurl_Include.h	2016-12-07 23:17:15.312781000 -0600
+@@ -916,6 +916,9 @@ extern "C"
+ #elif defined(__APPLE__) && defined(__MACH__)
+     #define MEDIAINFODLL_NAME  "libcurl.4.dylib"
+     #define __stdcall
++#elif defined(__CYGWIN__)
++    #define MEDIAINFODLL_NAME  "cygcurl-4.dll"
++    #define __stdcall
+ #else
+     #define MEDIAINFODLL_NAME  "libcurl.so.0"
+     #define __stdcall
+--- origsrc/MediaInfoLib/Source/MediaInfoDLL/MediaInfoDLL.h	2016-12-01 04:10:26.000000000 -0600
++++ src/MediaInfoLib/Source/MediaInfoDLL/MediaInfoDLL.h	2016-12-07 23:16:21.409656800 -0600
+@@ -131,6 +131,9 @@
+     #else /* __cplusplus */
+         #include <stddef.h> //for size_t
+     #endif /* __cplusplus */
++#elif defined(__CYGWIN__)
++    #define MEDIAINFODLL_NAME "cygmediainfo-0.dll"
++    #define __stdcall
+ #else
+     #define MEDIAINFODLL_NAME "libmediainfo.so.0"
+     #define __stdcall

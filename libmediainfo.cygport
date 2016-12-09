@@ -1,0 +1,39 @@
+NAME="libmediainfo"
+VERSION=0.7.91
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="Multimedia file information library"
+DESCRIPTION="MediaInfo is a convenient unified display of the most relevant
+technical and tag data for video and audio files."
+HOMEPAGE="http://mediaarea.net/"
+SRC_URI="http://mediaarea.net/download/source/libmediainfo/${VERSION}/libmediainfo_${VERSION}.tar.xz"
+SRC_DIR="MediaInfoLib"
+PATCH_URI="
+	0.7.91-dllexport.patch
+	0.7.91-dllnames.patch
+"
+
+PKG_NAMES="libmediainfo0 libmediainfo-devel"
+libmediainfo0_CONTENTS="
+	usr/bin/cygmediainfo-0.dll
+	usr/share/doc/libmediainfo/
+"
+libmediainfo_devel_CONTENTS="
+	usr/include/MediaInfo*/
+	usr/lib/libmediainfo.dll.a
+	usr/lib/pkgconfig/libmediainfo.pc
+"
+
+src_compile() {
+	lndirs
+	cd ${B}/Project/GNU/Library
+	cygautoreconf
+	CYGCONF_SOURCE=. \
+	cygconf --with-libcurl --with-libtinyxml2 --without-libmms
+	cygmake
+}
+
+src_install() {
+	cd ${B}/Project/GNU/Library
+	cyginstall
+}
