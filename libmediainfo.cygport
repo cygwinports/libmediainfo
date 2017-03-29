@@ -1,5 +1,5 @@
 NAME="libmediainfo"
-VERSION=0.7.91
+VERSION=0.7.93
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="Multimedia file information library"
